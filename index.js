@@ -1,5 +1,6 @@
 #! /usr/bin/env node
 import inquirer from "inquirer";
+import chalk from "chalk";
 let currency = {
     USD: 1,
     PKR: 277.95,
@@ -7,7 +8,7 @@ let currency = {
     IDR: 16117.80,
 };
 let user_answer = await inquirer.prompt([{
-        message: "Select From Curreny ",
+        message: "Select From Currency ",
         type: "list",
         name: "From",
         choices: ["USD", "PKR", "INR", "IDR"]
@@ -19,7 +20,7 @@ let user_answer = await inquirer.prompt([{
         choices: ["USD", "PKR", "INR", "IDR"]
     },
     {
-        message: "Enter Amount to convert",
+        message: "Enter Amount to convert:",
         type: "number",
         name: "amount",
     }
@@ -29,5 +30,7 @@ let toAmount = currency[user_answer.to];
 let amount = user_answer.amount;
 let BaseAmount = amount / fromAmount;
 let convertedAmount = BaseAmount * toAmount;
-console.log("1 USD in" + " " + user_answer.to + " " + "is" + " " + currency[user_answer.to]);
-console.log(convertedAmount + " " + user_answer.to);
+console.log(`===================`);
+console.log(chalk.bold("1 USD in" + " " + user_answer.to + " " + "is" + " " + currency[user_answer.to]));
+console.log(`So,`);
+console.log(chalk.bold(user_answer.amount + " " + user_answer.From + " equals" + " " + chalk.green(Math.floor(convertedAmount)) + " " + chalk.yellow(user_answer.to)));
